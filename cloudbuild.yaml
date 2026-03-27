@@ -1,0 +1,25 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/dotnet-hello-world-repo/dotnet-hello-world:$COMMIT_SHA', '.']
+  # Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/dotnet-hello-world-repo/dotnet-hello-world:$COMMIT_SHA']
+  # Deploy the image to Cloud Run in australia-southeast1
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'dotnet-hello-world'
+      - '--image'
+      - 'europe-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/dotnet-hello-world-repo/dotnet-hello-world:$COMMIT_SHA'
+      - '--region'
+      - 'australia-southeast1' # Changed to australia-southeast1
+      - '--platform'
+      - 'managed' # Ensure managed platform is specified
+      - '--allow-unauthenticated' # Or configure appropriate authentication
+
+# Add these lines to resolve the logging error
+options:
+  logging: CLOUD_LOGGING_ONLY
