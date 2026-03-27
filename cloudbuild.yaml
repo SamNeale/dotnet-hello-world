@@ -1,7 +1,7 @@
 steps:
   # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/dotnet-hello-world-repo/dotnet-hello-world:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'australia-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/cloud-run-source-deploy:$COMMIT_SHA', '.']
   # Push the Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/dotnet-hello-world-repo/dotnet-hello-world:$COMMIT_SHA']
@@ -13,7 +13,7 @@ steps:
       - 'deploy'
       - 'dotnet-hello-world'
       - '--image'
-      - 'europe-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/dotnet-hello-world-repo/dotnet-hello-world:$COMMIT_SHA'
+      - 'australia-southeast1-docker.pkg.dev/project-f80faf7f-b95c-4202-b40/cloud-run-source-deploy:$COMMIT_SHA'
       - '--region'
       - 'australia-southeast1' # Changed to australia-southeast1
       - '--platform'
