@@ -1,4 +1,4 @@
-@dotnet_hello_world_HostAddress = http://localhost:5129
+@dotnet_hello_world_HostAddress = http://localhost:8080
 
 GET {{dotnet_hello_world_HostAddress}}/weatherforecast/
 Accept: application/json
