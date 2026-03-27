@@ -16,4 +16,4 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # 5. Start the API
-ENTRYPOINT ["dotnet", "YourProjectName.dll"]
+ENTRYPOINT ["dotnet", "dotnet-hello-world.dll"]
